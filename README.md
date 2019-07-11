@@ -1,5 +1,7 @@
 # `@vtex/danger`
 
+> This README is WIP
+
 ## Usage
 
 `@vtex/danger` exports a `assert` method which executes all configured checks:
