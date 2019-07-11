@@ -1,23 +1,35 @@
 {
   "name": "@vtex/danger",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": "Christian Kaisermann <christian@kaisermann.me>",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
     "lint": "eslint \"src/**/*.js\"",
-    "format": "prettier --loglevel silent --write \"src/**/*.js\" && eslint --fix \"src/**/*.js\""
+    "format": "prettier --loglevel silent --write \"src/**/*.js\" && eslint --fix \"src/**/*.js\"",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "release": "npm build && npm run version && git add package.json && git commit -m \"chore: release v$npm_package_version\"",
+    "tag": "git tag -a v$npm_package_version -m 'Release v$npm_package_version'",
+    "prepublishOnly": "npm run release"
   },
   "files": [
-    "src/"
+    "index.js"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
+    "conventional-changelog-cli": "^2.0.21",
     "eslint": "^5.13.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-vtex": "^10.1.0",
     "prettier": "^1.16.4",
+    "rollup": "^1.16.7",
+    "rollup-plugin-terser": "^5.1.1",
     "typescript": "^3.5.2"
   },
-  "peerDependencies": {
+  "dependencies": {
     "danger": "^9.0.2"
   }
 }

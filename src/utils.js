@@ -1,19 +1,19 @@
-const { readFileSync } = require('fs');
+import { readFileSync } from 'fs';
 
 const { pr } = danger.github;
 const repoURL = pr.head.repo.html_url;
 const ref = pr.head.ref;
 
-exports.formatFilename = file => `\`${file}\``;
+export const formatFilename = file => `\`${file}\``;
 
-exports.formatFilenames = files => files.map(exports.formatFilename).join(', ');
+export const formatFilenames = files => files.map(formatFilename).join(', ');
 
-exports.linkToFile = (file, line) => {
+export const linkToFile = (file, line) => {
   const lineId = line ? `#L${line}` : '';
   return `[${file}${lineId}](${repoURL}/blob/${ref}/${file}${lineId})`;
 };
 
-exports.findTerm = (term, content) => {
+export const findTerm = (term, content) => {
   let index;
   if (term instanceof RegExp) {
     const match = content.match(term);
@@ -29,22 +29,26 @@ exports.findTerm = (term, content) => {
   return [term, line];
 };
 
-exports.findFirstTerm = (terms, content) => {
+export const findFirstTerm = (terms, content) => {
   for (let i = terms.length; i--; ) {
-    const [term, line] = exports.findTerm(terms[i], content);
+    const [term, line] = findTerm(terms[i], content);
     if (term) return [term, line];
   }
   return [];
 };
 
-exports.findTermsOnFiles = (terms, files) =>
+export const findTermsOnFiles = (terms, files) =>
   files
     .map(file => {
-      let [term, line] = exports.findFirstTerm(
-        terms,
-        readFileSync(file).toString()
-      );
+      let [term, line] = findFirstTerm(terms, readFileSync(file).toString());
       if (line) return [file, term, line];
       return null;
     })
     .filter(Boolean);
+
+export const checkTerms = ({ files, terms, formatter }) => {
+  return findTermsOnFiles(terms, files).reduce((acc, [file, term, line]) => {
+    acc.push([formatter(term, file, line), file, line]);
+    return acc;
+  }, []);
+};
