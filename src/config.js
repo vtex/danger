@@ -1,13 +1,9 @@
-const FAIL = 'fail';
-const WARN = 'warn';
-const INFO = 'info';
-
 let currentConfig;
 
 export const defaultConfig = {
   rules: {
     file_changes: [
-      INFO,
+      'info',
       {
         created: true,
         deleted: true,
@@ -15,32 +11,32 @@ export const defaultConfig = {
       },
     ],
     changelog: [
-      FAIL,
+      'fail',
       {
         path: 'CHANGELOG.md',
       },
     ],
-    description: [FAIL, { minLength: 20 }],
-    wip: FAIL,
-    assignee: WARN,
-    reviewers: WARN,
+    description: ['fail', { minLength: 20 }],
+    wip: 'fail',
+    assignee: 'warn',
+    reviewers: 'warn',
     pr_size: [
-      WARN,
+      'warn',
       {
         additionLimit: 800,
         deletionLimit: -1,
       },
     ],
-    lock_file: WARN,
-    need_rebase: WARN,
+    lock_file: 'warn',
+    need_rebase: 'warn',
     dot_only: [
-      FAIL,
+      'fail',
       {
         pattern: /test|spec/i,
       },
     ],
     console_log: [
-      WARN,
+      'warn',
       {
         pattern: /\.[tj]sx?$/i,
       },
