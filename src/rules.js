@@ -31,10 +31,10 @@ export function showFileChanges({
   return msg;
 }
 
-export function checkChangelog() {
+export function checkChangelog({ path }) {
   const hasChangelog =
-    modifiedFiles.includes('CHANGELOG.md') ||
-    createdFiles.includes('CHANGELOG.md');
+    modifiedFiles.includes(path) ||
+    createdFiles.includes(path);
   if (!hasChangelog) {
     return ':pencil: Please add a changelog entry for your changes.';
   }

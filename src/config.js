@@ -14,7 +14,12 @@ export const defaultConfig = {
         modified: true,
       },
     ],
-    changelog: FAIL,
+    changelog: [
+      FAIL,
+      {
+        path: 'CHANGELOG.md',
+      },
+    ],
     description: [FAIL, { minLength: 20 }],
     wip: FAIL,
     assignee: WARN,
