@@ -246,7 +246,7 @@ Display a message if the pull request branch needs a rebase with the `base` bran
 
 ### `dot_only`
 
-Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(` inside test files.
+Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(` inside files which respect the specified filename pattern.
 
 **Options:**
 
@@ -265,14 +265,14 @@ Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(` inside test files.
 
 ### `console_log`
 
-Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(` inside test files.
+Enforce no `console.log` inside files which respect the specified filename pattern.
 
 **Options:**
 
 ```js
 {
   // files to search pattern
-  pattern: /test|spec/i,
+  pattern: /\.[tj]sx?$/i,
 }
 ```
 
