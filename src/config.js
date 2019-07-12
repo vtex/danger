@@ -51,7 +51,7 @@ export const setConfig = config => {
     ...(config || {}),
     rules: {
       ...defaultConfig.rules,
-      ...(config.rules || {}),
+      ...(config && config.rules),
     },
   };
   return currentConfig;
