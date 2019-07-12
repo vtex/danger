@@ -19,11 +19,7 @@ It also accepts a configuration object:
 // dangerfile.js
 const { assert } = require('@vtex/danger');
 
-assert({
-  matchers: {
-    test_files: path => path.match(/test|spec/i),
-    code_files: path => path.match(/\.[tj]sx?$/i),
-  },
+const config = {
   rules: {
     file_changes: [
       'info',
@@ -36,8 +32,8 @@ assert({
     changelog: 'fail',
     description: ['fail', { minLength: 20 }],
     wip: 'fail',
-    assignee: 'fail',
-    reviewers: 'fail',
+    assignee: 'warn',
+    reviewers: 'warn',
     pr_size: [
       'warn',
       {
@@ -47,8 +43,44 @@ assert({
     ],
     lock_file: 'warn',
     need_rebase: 'warn',
-    dot_only: 'fail',
-    console_log: 'warn',
+    dot_only: [
+      'fail',
+      {
+        pattern: /test|spec/i,
+      },
+    ],
+    console_log: [
+      'warn',
+      {
+        pattern: /\.[tj]sx?$/i,
+      },
+    ],
   },
-});
+};
+
+assert(config);
 ```
+
+## Rules
+
+### `file_changes`
+
+### `changelog`
+
+### `description`
+
+### `wip`
+
+### `assignee`
+
+### `reviewers`
+
+### `pr_size`
+
+### `lock_file`
+
+### `need_rebase`
+
+### `dot_only`
+
+### `console_log`

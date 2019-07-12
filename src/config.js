@@ -5,10 +5,6 @@ const INFO = 'info';
 let currentConfig;
 
 export const defaultConfig = {
-  matchers: {
-    test_files: path => path.match(/test|spec/i),
-    code_files: path => path.match(/\.[tj]sx?$/i),
-  },
   rules: {
     file_changes: [
       INFO,
@@ -21,8 +17,8 @@ export const defaultConfig = {
     changelog: FAIL,
     description: [FAIL, { minLength: 20 }],
     wip: FAIL,
-    assignee: FAIL,
-    reviewers: FAIL,
+    assignee: WARN,
+    reviewers: WARN,
     pr_size: [
       WARN,
       {
@@ -32,16 +28,31 @@ export const defaultConfig = {
     ],
     lock_file: WARN,
     need_rebase: WARN,
-    dot_only: FAIL,
-    console_log: WARN,
+    dot_only: [
+      FAIL,
+      {
+        pattern: /test|spec/i,
+      },
+    ],
+    console_log: [
+      WARN,
+      {
+        pattern: /\.[tj]sx?$/i,
+      },
+    ],
   },
 };
 
 export const getConfig = () => currentConfig;
 
 export const setConfig = config => {
-  return (currentConfig = Object.assign({}, defaultConfig, config));
+  currentConfig = {
+    ...defaultConfig,
+    ...config,
+    rules: {
+      ...defaultConfig.rules,
+      ...config.rules,
+    },
+  };
+  return currentConfig;
 };
-
-export const matchFiles = (matcherId, files) =>
-  files.filter(currentConfig.matchers[matcherId]);

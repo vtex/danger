@@ -21,7 +21,7 @@ const ruleMap = {
 export function assert(config) {
   const { rules } = setConfig(config);
 
-  Object.entries(rules).forEach(([rule, options]) => {
+  for (const [rule, options] of Object.entries(rules)) {
     const [level, ruleOptions] = Array.isArray(options) ? options : [options];
     const result = []
       .concat(ruleMap[rule](ruleOptions))
@@ -34,7 +34,7 @@ export function assert(config) {
       if (level === 'fail') return fail(text, file, line);
       throw new Error(`Invalid log level at rule '${rule}'`);
     });
-  });
+  }
 }
 
 export { Collections as collections, Utils as utils };

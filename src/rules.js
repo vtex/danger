@@ -85,9 +85,9 @@ export function checkPRSize({ additionLimit = 800, deletionLimit = 0 }) {
   }
 }
 
-export function checkTestFiles() {
+export function checkTestFiles({ pattern }) {
   return checkTerms({
-    files: matchFiles('test_files', existingFiles),
+    files: existingFiles.filter(file => file.match(pattern)),
     terms: ['it.only', 'describe.only', 'fdescribe', 'fit('],
     formatter(term, file, line) {
       return `An \`${term}\` was left in this file ${linkToFile(file, line)}`;
@@ -95,9 +95,9 @@ export function checkTestFiles() {
   });
 }
 
-export function checkConsoleLog() {
+export function checkConsoleLog({ pattern }) {
   return checkTerms({
-    files: matchFiles('code_files', existingFiles),
+    files: existingFiles.filter(file => file.match(pattern)),
     terms: ['console.log'],
     formatter(term, file, line) {
       return `A wild \`${term}\` has appeared on this file: ${linkToFile(
