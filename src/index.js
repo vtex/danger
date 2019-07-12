@@ -31,12 +31,24 @@ export function assert(config) {
       .filter(Boolean)
       .map(i => (Array.isArray(i) ? i : [i]));
 
-    result.forEach(([text, file, line]) => {
-      if (level === 'info') return message(text, file, line);
-      if (level === 'warn') return warn(text, file, line);
-      if (level === 'fail') return fail(text, file, line);
+    for (const [text, file, line] of result) {
+      if (level === 'info') {
+        message(text, file, line);
+        continue;
+      }
+
+      if (level === 'warn') {
+        warn(text, file, line);
+        continue;
+      }
+
+      if (level === 'fail') {
+        fail(text, file, line);
+        continue;
+      }
+
       throw new Error(`Invalid log level at rule '${rule}'`);
-    });
+    }
   }
 }
 
