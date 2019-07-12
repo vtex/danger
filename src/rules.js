@@ -32,9 +32,7 @@ export function showFileChanges({
 }
 
 export function checkChangelog({ path }) {
-  const hasChangelog =
-    modifiedFiles.includes(path) ||
-    createdFiles.includes(path);
+  const hasChangelog = existingFiles.includes(path);
   if (!hasChangelog) {
     return ':pencil: Please add a changelog entry for your changes.';
   }
