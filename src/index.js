@@ -23,6 +23,9 @@ export function assert(config) {
 
   for (const [rule, options] of Object.entries(rules)) {
     const [level, ruleOptions] = Array.isArray(options) ? options : [options];
+
+    if (!level || level === 'off') continue;
+
     const result = []
       .concat(ruleMap[rule](ruleOptions))
       .filter(Boolean)
