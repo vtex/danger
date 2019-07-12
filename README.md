@@ -1,7 +1,5 @@
 # `@vtex/danger`
 
-> This README is WIP
-
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
 <!-- code_chunk_output -->
@@ -83,6 +81,26 @@ assert(config);
 ```
 
 ## Rules
+
+Rules are configured in a similar manner to `eslint` rules:
+
+```js
+{
+  rules:  {
+    example_rule: 'warn',
+    other_rule: ['fail', { path: 'foo' }].
+    some_rule: 'off',
+    not_the_same_rule: 'message'
+  }
+}
+```
+
+**Log levels**
+
+- `off` - disable the rule;
+- `info` - rule result is a informational log;
+- `warn` - rule result should be an alert;
+- `fail` - rule result will block the pull request;
 
 ### `file_changes`
 
