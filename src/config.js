@@ -48,10 +48,10 @@ export const getConfig = () => currentConfig;
 export const setConfig = config => {
   currentConfig = {
     ...defaultConfig,
-    ...config,
+    ...(config || {}),
     rules: {
       ...defaultConfig.rules,
-      ...config.rules,
+      ...(config.rules || {}),
     },
   };
   return currentConfig;

@@ -1,5 +1,4 @@
 import { formatFilenames, linkToFile, checkTerms } from './utils.js';
-import { matchFiles } from './config.js';
 import {
   modifiedFiles,
   deletedFiles,
