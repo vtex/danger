@@ -1,3 +1,17 @@
+## [0.0.5-beta.2](https://github.com/vtex/danger/compare/v0.0.5-beta.1...v0.0.5-beta.2) (2019-07-12)
+
+
+### Bug Fixes
+
+* 🐛 log level off not working ([982ddd4](https://github.com/vtex/danger/commit/982ddd4))
+
+
+### Features
+
+* 🎸 add path property to changelog rule ([31d1bcd](https://github.com/vtex/danger/commit/31d1bcd))
+
+
+
 ## [0.0.5-beta.1](https://github.com/vtex/danger/compare/v0.0.4...v0.0.5-beta.1) (2019-07-12)
 
 

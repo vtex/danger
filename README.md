@@ -1,23 +1,24 @@
 # `@vtex/danger`
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+Opinionated and configurable `danger.js` rules.
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=3 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
-- [`@vtex/danger`](#vtexdanger)
-  - [Usage](#usage)
-  - [Rules](#rules)
-    - [`file_changes`](#file_changes)
-    - [`changelog`](#changelog)
-    - [`description`](#description)
-    - [`wip`](#wip)
-    - [`assignee`](#assignee)
-    - [`reviewers`](#reviewers)
-    - [`pr_size`](#pr_size)
-    - [`lock_file`](#lock_file)
-    - [`need_rebase`](#need_rebase)
-    - [`dot_only`](#dot_only)
-    - [`console_log`](#console_log)
+- [Usage](#usage)
+- [Rules](#rules)
+  - [`file_changes`](#file_changes)
+  - [`changelog`](#changelog)
+  - [`description`](#description)
+  - [`wip`](#wip)
+  - [`assignee`](#assignee)
+  - [`reviewers`](#reviewers)
+  - [`pr_size`](#pr_size)
+  - [`lock_file`](#lock_file)
+  - [`need_rebase`](#need_rebase)
+  - [`dot_only`](#dot_only)
+  - [`console_log`](#console_log)
 
 <!-- /code_chunk_output -->
 
