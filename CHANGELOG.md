@@ -1,3 +1,12 @@
+## [0.0.5-beta.4](https://github.com/vtex/danger/compare/v0.0.5-beta.3...v0.0.5-beta.4) (2019-07-15)
+
+
+### Features
+
+* :guitar: Add no_debugger rule ([c518e87](https://github.com/vtex/danger/commit/c518e87))
+
+
+
 ## [0.0.5-beta.3](https://github.com/vtex/danger/compare/v0.0.5-beta.1...v0.0.5-beta.3) (2019-07-12)
 
 

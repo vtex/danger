@@ -295,4 +295,4 @@ Enforce no `debugger` inside files which respect the specified filename pattern.
 
 **Example:**
 
-> ⚠️ Is this a `debugger` that I see on this [withQuery.tsx#L52](https://github.com/owner/repo/blob/src/withQuery.tsx#L52)?
+> ⚠️ Is this a `debugger` that I see on [withQuery.tsx#L52](https://github.com/owner/repo/blob/src/withQuery.tsx#L52)?
