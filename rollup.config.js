@@ -6,5 +6,5 @@ export default {
   input: 'src/index.js',
   output: [{ file: pkg.main, format: 'cjs' }],
   plugins: [terser()],
-  external: ['fs'],
+  external: ['fs', 'path'],
 };

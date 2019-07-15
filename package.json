@@ -1,6 +1,6 @@
 {
   "name": "@vtex/danger",
-  "version": "0.0.5-beta.4",
+  "version": "0.0.5-beta.5",
   "author": "Christian Kaisermann <christian@kaisermann.me>",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-vtex": "^10.1.0",
     "prettier": "^1.16.4",
+    "releasy": "^1.10.0",
     "rollup": "^1.16.7",
     "rollup-plugin-terser": "^5.1.1",
     "typescript": "^3.5.2"
