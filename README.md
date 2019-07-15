@@ -17,8 +17,8 @@ Opinionated and configurable `danger.js` rules.
   - [`pr_size`](#pr_size)
   - [`lock_file`](#lock_file)
   - [`need_rebase`](#need_rebase)
-  - [`dot_only`](#dot_only)
-  - [`console_log`](#console_log)
+  - [`no_dot_only`](#no_dot_only)
+  - [`no_console_log`](#no_console_log)
 
 <!-- /code_chunk_output -->
 
@@ -63,13 +63,13 @@ const config = {
     ],
     lock_file: 'warn',
     need_rebase: 'warn',
-    dot_only: [
+    no_dot_only: [
       'fail',
       {
         pattern: /test|spec/i,
       },
     ],
-    console_log: [
+    no_console_log: [
       'warn',
       {
         pattern: /\.[tj]sx?$/i,
@@ -244,7 +244,7 @@ Display a message if the pull request branch needs a rebase with the `base` bran
 
 ---
 
-### `dot_only`
+### `no_dot_only`
 
 Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(` inside files which respect the specified filename pattern.
 
@@ -263,7 +263,7 @@ Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(` inside files which re
 
 ---
 
-### `console_log`
+### `no_console_log`
 
 Enforce no `console.log` inside files which respect the specified filename pattern.
 
@@ -279,3 +279,20 @@ Enforce no `console.log` inside files which respect the specified filename patte
 **Example:**
 
 > ⚠️ A wild `console.log` has appeared on this file: `react/components/pages/Details.tsx#L21`. Is this supposed to be here?
+
+### `no_debugger`
+
+Enforce no `debugger` inside files which respect the specified filename pattern.
+
+**Options:**
+
+```js
+{
+  // files to search pattern
+  pattern: /\.[tj]sx?$/i,
+}
+```
+
+**Example:**
+
+> ⚠️ Is this a `debugger` that I see on this [withQuery.tsx#L52](https://github.com/owner/repo/blob/src/withQuery.tsx#L52)?

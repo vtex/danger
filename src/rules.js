@@ -82,29 +82,6 @@ export function checkPRSize({ additionLimit = 800, deletionLimit = 0 }) {
   }
 }
 
-export function checkTestFiles({ pattern }) {
-  return checkTerms({
-    files: existingFiles.filter(file => file.match(pattern)),
-    terms: ['it.only', 'describe.only', 'fdescribe', 'fit('],
-    formatter(term, file, line) {
-      return `An \`${term}\` was left in this file ${linkToFile(file, line)}`;
-    },
-  });
-}
-
-export function checkConsoleLog({ pattern }) {
-  return checkTerms({
-    files: existingFiles.filter(file => file.match(pattern)),
-    terms: ['console.log'],
-    formatter(term, file, line) {
-      return `A wild \`${term}\` has appeared on this file: ${linkToFile(
-        file,
-        line
-      )}. Is this supposed to be here?`;
-    },
-  });
-}
-
 export function checkLockFileUpdated() {
   const packageChanged = modifiedFiles.includes('package.json');
   const lockfileChanged = modifiedFiles.includes('yarn.lock');
@@ -118,4 +95,37 @@ export function checkMergeability() {
   if (!pr.mergeable_state === 'dirty') {
     return `“Branch is not rebased with \`${pr.base.ref}\`.`;
   }
+}
+
+export function noDotOnly({ pattern }) {
+  return checkTerms({
+    files: existingFiles.filter(file => file.match(pattern)),
+    terms: ['it.only', 'describe.only', 'fdescribe', 'fit('],
+    formatter(term, file, line) {
+      return `An \`${term}\` was left in this file ${linkToFile(file, line)}`;
+    },
+  });
+}
+
+export function noConsoleLog({ pattern }) {
+  return checkTerms({
+    files: existingFiles.filter(file => file.match(pattern)),
+    terms: ['console.log'],
+    formatter(term, file, line) {
+      return `A wild \`${term}\` has appeared on this file: ${linkToFile(
+        file,
+        line
+      )}. Is this supposed to be here?`;
+    },
+  });
+}
+
+export function noDebugger({ pattern }) {
+  return checkTerms({
+    files: existingFiles.filter(file => file.match(pattern)),
+    terms: [/^\s+?(debugger;?)$/m],
+    formatter(term, file, line) {
+      return `Is this a \`${term}\` that I see on ${linkToFile(file, line)}?`;
+    },
+  });
 }

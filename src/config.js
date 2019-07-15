@@ -29,14 +29,20 @@ export const defaultConfig = {
     ],
     lock_file: 'warn',
     need_rebase: 'warn',
-    dot_only: [
+    no_dot_only: [
       'fail',
       {
         pattern: /test|spec/i,
       },
     ],
-    console_log: [
+    no_console_log: [
       'warn',
+      {
+        pattern: /\.[tj]sx?$/i,
+      },
+    ],
+    no_debugger: [
+      'fail',
       {
         pattern: /\.[tj]sx?$/i,
       },

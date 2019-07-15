@@ -14,8 +14,9 @@ const ruleMap = {
   pr_size: Rules.checkPRSize,
   lock_file: Rules.checkLockFileUpdated,
   need_rebase: Rules.checkMergeability,
-  dot_only: Rules.checkTestFiles,
-  console_log: Rules.checkConsoleLog,
+  no_dot_only: Rules.noDotOnly,
+  no_console_log: Rules.noConsoleLog,
+  no_debugger: Rules.noDebugger,
 };
 
 export function assert(config) {

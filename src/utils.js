@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs';
+import { basename } from 'path';
 
 const { pr } = danger.github;
 const repoURL = pr.head.repo.html_url;
@@ -8,19 +9,21 @@ export const formatFilename = file => `\`${file}\``;
 
 export const formatFilenames = files => files.map(formatFilename).join(', ');
 
-export const linkToFile = (file, line) => {
+export const linkToFile = (file, line, fullPathLabel = false) => {
   const lineId = line ? `#L${line}` : '';
-  return `[${file}${lineId}](${repoURL}/blob/${ref}/${file}${lineId})`;
+  const linkLabel = fullPathLabel ? file : basename(file);
+  return `[${linkLabel}${lineId}](${repoURL}/blob/${ref}/${file}${lineId})`;
 };
 
 export const findTerm = (term, content) => {
   let index;
   if (term instanceof RegExp) {
-    const match = content.match(term);
+    const match = term.exec(content);
     if (!match) return [];
     index = match.index;
     // replace the regexp with what matched
-    term = match[0];
+    // use first capture group if available
+    term = match[1] || match[0];
   } else {
     index = content.indexOf(term);
     if (index === -1) return [];
