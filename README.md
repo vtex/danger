@@ -46,7 +46,7 @@ const { assert } = require('@vtex/danger');
 const config = {
   rules: {
     file_changes: [
-      'info',
+      'off',
       {
         created: true,
         deleted: true,
@@ -75,6 +75,12 @@ const config = {
     ],
     no_console_log: [
       'warn',
+      {
+        pattern: /\.[tj]sx?$/i,
+      },
+    ],
+    no_debugger: [
+      'fail',
       {
         pattern: /\.[tj]sx?$/i,
       },

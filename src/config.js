@@ -3,7 +3,7 @@ let currentConfig;
 export const defaultConfig = {
   rules: {
     file_changes: [
-      'info',
+      'off',
       {
         created: true,
         deleted: true,
