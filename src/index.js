@@ -53,4 +53,4 @@ export function assert(config) {
   }
 }
 
-export { Collections as collections, Utils as utils };
+export { Collections, Utils };

@@ -1,4 +1,4 @@
-import { formatFilenames, linkToFile, checkTerms } from './utils.js';
+import { formatFilenames, linkToFile, searchForTerms } from './utils.js';
 import {
   modifiedFiles,
   deletedFiles,
@@ -98,7 +98,7 @@ export function checkMergeability() {
 }
 
 export function noDotOnly({ pattern }) {
-  return checkTerms({
+  return searchForTerms({
     files: existingFiles.filter(file => file.match(pattern)),
     terms: ['it.only', 'describe.only', 'fdescribe', 'fit('],
     formatter(term, file, line) {
@@ -108,7 +108,7 @@ export function noDotOnly({ pattern }) {
 }
 
 export function noConsoleLog({ pattern }) {
-  return checkTerms({
+  return searchForTerms({
     files: existingFiles.filter(file => file.match(pattern)),
     terms: ['console.log'],
     formatter(term, file, line) {
@@ -121,7 +121,7 @@ export function noConsoleLog({ pattern }) {
 }
 
 export function noDebugger({ pattern }) {
-  return checkTerms({
+  return searchForTerms({
     files: existingFiles.filter(file => file.match(pattern)),
     terms: [/^\s+?(debugger;?)$/m],
     formatter(term, file, line) {
