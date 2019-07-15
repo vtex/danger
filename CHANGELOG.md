@@ -1,3 +1,7 @@
+## [0.0.5-beta.6](https://github.com/vtex/danger/compare/v0.0.5-beta.5...v0.0.5-beta.6) (2019-07-15)
+
+
+
 ## [0.0.5-beta.5](https://github.com/vtex/danger/compare/v0.0.5-beta.3...v0.0.5-beta.5) (2019-07-15)
 
 
