@@ -17,6 +17,7 @@ const ruleMap = {
   no_dot_only: Rules.noDotOnly,
   no_console_log: Rules.noConsoleLog,
   no_debugger: Rules.noDebugger,
+  enforce_graphql_provider: Rules.enforceGraphQLProvider,
 };
 
 export function assert(config) {

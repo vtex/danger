@@ -288,7 +288,7 @@ Enforce no `console.log` inside files which respect the specified filename patte
 
 **Example:**
 
-> ⚠️ A wild `console.log` has appeared on this file: `react/components/pages/Details.tsx#L21`. Is this supposed to be here?
+> ⚠️ A wild `console.log` has appeared on `react/components/pages/Details.tsx#L21`. Is this supposed to be here?
 
 ### `no_debugger`
 

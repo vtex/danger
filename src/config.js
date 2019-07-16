@@ -47,6 +47,7 @@ export const defaultConfig = {
         pattern: /\.[tj]sx?$/i,
       },
     ],
+    enforce_graphql_provider: 'fail'
   },
 };
 

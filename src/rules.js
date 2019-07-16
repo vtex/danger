@@ -1,4 +1,9 @@
-import { formatFilenames, linkToFile, searchForTerms } from './utils.js';
+import {
+  formatFilenames,
+  linkToFile,
+  findTermsInfile,
+  findAndFormatTerms,
+} from './utils.js';
 import {
   modifiedFiles,
   deletedFiles,
@@ -98,34 +103,58 @@ export function checkMergeability() {
 }
 
 export function noDotOnly({ pattern }) {
-  return searchForTerms({
+  return findAndFormatTerms({
     files: existingFiles.filter(file => file.match(pattern)),
     terms: ['it.only', 'describe.only', 'fdescribe', 'fit('],
-    formatter(term, file, line) {
-      return `An \`${term}\` was left in this file ${linkToFile(file, line)}`;
+    formatter(file, term, line) {
+      return `A \`${term}\` was left in ${linkToFile(file, line)}`;
     },
   });
 }
 
 export function noConsoleLog({ pattern }) {
-  return searchForTerms({
+  return findAndFormatTerms({
     files: existingFiles.filter(file => file.match(pattern)),
     terms: ['console.log'],
-    formatter(term, file, line) {
-      return `A wild \`${term}\` has appeared on this file: ${linkToFile(
+    formatter(file, term, line) {
+      return `A wild \`${term}\` has appeared on ${linkToFile(
         file,
         line
-      )}. Is this supposed to be here?`;
+      )}. Is it supposed to be here?`;
     },
   });
 }
 
 export function noDebugger({ pattern }) {
-  return searchForTerms({
+  return findAndFormatTerms({
     files: existingFiles.filter(file => file.match(pattern)),
     terms: [/^\s+?(debugger;?)$/m],
-    formatter(term, file, line) {
+    formatter(file, term, line) {
       return `Is this a \`${term}\` that I see on ${linkToFile(file, line)}?`;
     },
   });
+}
+
+export function enforceGraphQLProvider() {
+  const graphqlFiles = existingFiles.filter(file =>
+    file.match(/\.(gql|graphql)$/)
+  );
+
+  if (graphqlFiles.length === 0) return;
+
+  const filesMatches = findTermsInfile({
+    files: graphqlFiles,
+    terms: [/provider:\s+?["'].*?["']/],
+  });
+
+  if (filesMatches.length === 0) {
+    return;
+  }
+
+  return filesMatches.map(
+    ([file]) =>
+      `No \`provider\` found on ${linkToFile(
+        file
+      )}. Please explicitly declare the query provider.`
+  );
 }

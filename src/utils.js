@@ -15,42 +15,46 @@ export const linkToFile = (file, line, fullPathLabel = false) => {
   return `[${linkLabel}${lineId}](${repoURL}/blob/${ref}/${file}${lineId})`;
 };
 
-const findTerm = (term, content) => {
-  let index;
-  if (term instanceof RegExp) {
-    const match = term.exec(content);
-    if (!match) return [];
-    index = match.index;
+const findPattern = (pattern, content) => {
+  if (typeof pattern === 'string') {
+    pattern = new RegExp(pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gm');
+  } else if (!pattern.global) {
+    pattern = new RegExp(pattern.source, pattern.flags + 'g');
+  }
+  pattern.lastIndex = 0;
+
+  const result = [];
+  let match;
+  while ((match = pattern.exec(content))) {
     // replace the regexp with what matched
     // use first capture group if available
-    term = match[1] || match[0];
-  } else {
-    index = content.indexOf(term);
-    if (index === -1) return [];
+    const matched_term = match[1] || match[0];
+    const line = content.substring(0, match.index).split('\n').length;
+    result.push([matched_term, line]);
   }
-  const line = content.substring(0, index).split('\n').length;
-  return [term, line];
+
+  return result;
 };
 
-const findFirstTerm = (terms, content) => {
-  for (let i = terms.length; i--; ) {
-    const [term, line] = findTerm(terms[i], content);
-    if (term) return [term, line];
-  }
-  return [];
+const findPatterns = (patterns, content) => {
+  patterns = Array.isArray(patterns) ? patterns : [patterns];
+  return patterns.reduce(
+    (acc, pattern) => acc.concat(findPattern(pattern, content)),
+    []
+  );
 };
 
-const findTermsOnFiles = (terms, files) =>
-  files
-    .map(file => {
-      let [term, line] = findFirstTerm(terms, readFileSync(file).toString());
-      if (line) return [file, term, line];
-      return null;
-    })
-    .filter(Boolean);
+export const findTermsInfile = ({ files, terms }) => {
+  return files.map(file => {
+    const content = readFileSync(file).toString();
+    return [file, findPatterns(terms, content)];
+  }, []);
+};
 
-export const searchForTerms = ({ files, terms, formatter }) => {
-  return findTermsOnFiles(terms, files).map(([file, term, line]) => {
-    return [formatter(term, file, line), file, line];
-  });
+export const findAndFormatTerms = ({ files, terms, formatter }) => {
+  return findTermsInfile({ files, terms }).reduce((acc, [file, matches]) => {
+    return acc.concat(
+      matches.map(([term, line]) => [formatter(file, term, line), term, line])
+    );
+  }, []);
 };
