@@ -1,6 +1,6 @@
 {
   "name": "@vtex/danger",
-  "version": "0.0.5-beta.7",
+  "version": "0.0.6",
   "author": "Christian Kaisermann <christian@kaisermann.me>",
   "main": "index.js",
   "scripts": {

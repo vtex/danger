@@ -147,13 +147,11 @@ export function enforceGraphQLProvider() {
     terms: [/provider:\s+?["'].*?["']/],
   });
 
-  if (filesMatches.length === 0) {
-    return;
-  }
+  if (filesMatches.length === 0) return;
 
   return filesMatches.map(
     ([file]) =>
-      `No \`provider\` found on ${linkToFile(
+      `No \`@context(provider: "...")\` found on ${linkToFile(
         file
       )}. Please explicitly declare the query provider.`
   );

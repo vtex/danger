@@ -48,7 +48,7 @@ export const findTermsInfile = ({ files, terms }) => {
   return files.map(file => {
     const content = readFileSync(file).toString();
     return [file, findPatterns(terms, content)];
-  }, []);
+  });
 };
 
 export const findAndFormatTerms = ({ files, terms, formatter }) => {

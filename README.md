@@ -20,15 +20,23 @@ Opinionated and configurable `danger.js` rules.
   - [`no_dot_only`](#no_dot_only)
   - [`no_console_log`](#no_console_log)
   - [`no_debugger`](#no_debugger)
-- [Utilities and Collections](#utilities-and-collections)
-  - [Collections](#collections)
-  - [Utilities](#utilities)
+  - [`enforce_graphql_provider`](#enforce_graphql_provider)
 
 <!-- /code_chunk_output -->
 
 ## Usage
 
-`@vtex/danger` exports a `assert` method which executes all configured checks:
+Begin by installing the package:
+
+```shell
+$ yarn add -D @vtex/danger
+# or
+$ npm i -D @vtex/danger
+```
+
+The next step is to create a `dangerfile.js` file. It's where `danger` expects your pull request checks to be.
+
+Instead of having to write all kinds of checks over and over again, `@vtex/danger` exports a `assert` method which executes all of its checks:
 
 ```js
 // dangerfile.js
@@ -58,33 +66,13 @@ const config = {
     wip: 'fail',
     assignee: 'warn',
     reviewers: 'warn',
-    pr_size: [
-      'warn',
-      {
-        additionLimit: 800,
-        deletionLimit: -1,
-      },
-    ],
+    pr_size: ['warn', { additionLimit: 800, deletionLimit: -1 }],
     lock_file: 'warn',
     need_rebase: 'warn',
-    no_dot_only: [
-      'fail',
-      {
-        pattern: /test|spec/i,
-      },
-    ],
-    no_console_log: [
-      'warn',
-      {
-        pattern: /\.[tj]sx?$/i,
-      },
-    ],
-    no_debugger: [
-      'fail',
-      {
-        pattern: /\.[tj]sx?$/i,
-      },
-    ],
+    no_dot_only: ['fail', { pattern: /test|spec/i }],
+    no_console_log: ['warn', { pattern: /\.[tj]sx?$/i }],
+    no_debugger: ['fail', { pattern: /\.[tj]sx?$/i }],
+    enforce_graphql_provider: 'fail',
   },
 };
 
@@ -307,74 +295,10 @@ Enforce no `debugger` inside files which respect the specified filename pattern.
 
 > ⚠️ Is this a `debugger` that I see on [withQuery.tsx#L52](https://github.com/owner/repo/blob/src/withQuery.tsx#L52)?
 
----
+### `enforce_graphql_provider`
 
-## Utilities and Collections
-
-`@vtex/danger` exports some utilities and collections to facilitate creating other checks.
-
-### Collections
-
-**Available collections:**
-
-`const { Collections } = require('@vtex/danger');`
-
-- `modifiedFiles`: a list of all modified files;
-- `createdFiles`: a list of all created files;
-- `deletedFiles`: a list of all deleted files;
-- `existingFiles`: a list of all modified or created files;
-- `allFiles`: a list of all files;
-
-### Utilities
-
-#### `linkToFile`
-
-Return a pretty link to the passed file.
-
-**Paramaters:**
-
-- `file` (`string`): the file path;
-- `lineNumber` (`string|number`): an optional line number to link to;
-- `fullPathLabel` (`boolean`): optionally display the full path to the file as the link's label;
-
-**Return:**
-
-A string in the format of a markdown link: `[label](https://...)`.
-
----
-
-#### `searchForTerms`
-
-Searches for specific terms/patterns on certain files.
-
-**Paramaters:**
-
-- `options` (`object`)
-  - `terms` (`Array<string|RegExp>`): array of terms or patterns to match;
-  - `files` (`Array<string>`): array of file paths to search for `terms`;
-  - `formatter` (`function`): a function(`term`, `file`, `line`) which returns the danger log text;
-
-**Return:**
-
-An array of all first occurrences of searched terms in the format of `[text, file, line]`, great for passing to danger's `message`, `warn` and `fail` functions.
+Enforce `.gql` and `.graphql` files to explicitly declare the `@context(provider: "...")` for graphql queries.
 
 **Example:**
 
-```js
-const { assert, Utils, Collections } = require('@vtex/danger');
-
-// run all official @vtex/danger checks
-assert();
-
-// Search all existing js files for the terms `displayName` and `foo` and warn if any was found
-Utils.searchForTerms({
-  files: Collections.existingFiles.filter(file => file.endsWith('js')),
-  terms: ['displayName', 'foo'],
-  formatter(term, file, line) {
-    return `Can't have a \`${term}\` lying around on ${Utils.linkToFile(
-      file,
-      line
-    )}`;
-  },
-}).forEach(result => warn(...result));
-```
+> ⚠️ No `@context(provider: "...")` found on [updateName.gql](https://github.com/owner/repo/updateName.gql). Please explicitly declare the query provider.
