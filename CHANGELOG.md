@@ -1,3 +1,12 @@
+## [0.0.6](https://github.com/vtex/danger/compare/v0.0.5-beta.7...v0.0.6) (2019-07-18)
+
+
+### Features
+
+* 🎸 graphql provider rule ([8a0b5b1](https://github.com/vtex/danger/commit/8a0b5b1))
+
+
+
 ## [0.0.5-beta.7](https://github.com/vtex/danger/compare/v0.0.5-beta.6...v0.0.5-beta.7) (2019-07-16)
 
 
