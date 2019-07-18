@@ -54,7 +54,7 @@ export const findTermsInfile = ({ files, terms }) => {
 export const findAndFormatTerms = ({ files, terms, formatter }) => {
   return findTermsInfile({ files, terms }).reduce((acc, [file, matches]) => {
     return acc.concat(
-      matches.map(([term, line]) => [formatter(file, term, line), term, line])
+      matches.map(([term, line]) => [formatter(file, term, line), file, line])
     );
   }, []);
 };
