@@ -1,3 +1,12 @@
+## [0.0.7](https://github.com/vtex/danger/compare/v0.0.6...v0.0.7) (2019-07-18)
+
+
+### Bug Fixes
+
+* 🐛 wrong parameter file ([96c16fd](https://github.com/vtex/danger/commit/96c16fd))
+
+
+
 ## [0.0.6](https://github.com/vtex/danger/compare/v0.0.5-beta.7...v0.0.6) (2019-07-18)
 
 
