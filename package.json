@@ -3,34 +3,49 @@
   "version": "0.0.7",
   "author": "Christian Kaisermann <christian@kaisermann.me>",
   "main": "index.js",
-  "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "lint": "eslint \"src/**/*.js\"",
-    "format": "prettier --loglevel silent --write \"src/**/*.js\" && eslint --fix \"src/**/*.js\"",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "tag": "git tag -a v$npm_package_version -m 'Release v$npm_package_version'",
-    "release": "npm run build && npm run version && git add package.json && git commit -m \"chore: release v$npm_package_version\"",
-    "prepublishOnly": "npm run release && npm run tag"
-  },
   "files": [
     "index.js"
   ],
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "lint": "eslint --ext js,jsx,ts,tsx .",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json}\"",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "tag": "git tag -a v$npm_package_version -m 'Release v$npm_package_version'",
+    "release": "npm run build && npm run version && git add package.json && git commit -m \"chore: release v$npm_package_version\"",
+    "prepublishOnly": "npm run release && npm run tag"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js,tsx,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
-    "conventional-changelog-cli": "^2.0.21",
-    "eslint": "^5.13.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-config-vtex": "^10.1.0",
-    "prettier": "^1.16.4",
-    "releasy": "^1.10.0",
-    "rollup": "^1.16.7",
-    "rollup-plugin-terser": "^5.1.1",
-    "typescript": "^3.5.2"
+    "conventional-changelog-cli": "^2.0.31",
+    "eslint": "^6.8.0",
+    "eslint-config-vtex": "^12.3.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "prettier": "^2.0.2",
+    "releasy": "^1.10.2",
+    "rollup": "^2.1.0",
+    "rollup-plugin-terser": "^5.3.0",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "danger": "^9.0.2"
+    "danger": "^10.0.0"
   }
 }

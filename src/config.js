@@ -2,14 +2,6 @@ let currentConfig;
 
 export const defaultConfig = {
   rules: {
-    file_changes: [
-      'off',
-      {
-        created: true,
-        deleted: true,
-        modified: true,
-      },
-    ],
     changelog: [
       'fail',
       {
@@ -28,26 +20,25 @@ export const defaultConfig = {
       },
     ],
     lock_file: 'warn',
-    need_rebase: 'warn',
     no_dot_only: [
       'fail',
       {
-        pattern: /test|spec/i,
+        filePattern: /test|spec/i,
       },
     ],
     no_console_log: [
       'warn',
       {
-        pattern: /\.[tj]sx?$/i,
+        filePattern: /\.[tj]sx?$/i,
       },
     ],
     no_debugger: [
       'fail',
       {
-        pattern: /\.[tj]sx?$/i,
+        filePattern: /\.[tj]sx?$/i,
       },
     ],
-    enforce_graphql_provider: 'fail'
+    enforce_graphql_provider: 'fail',
   },
 };
 

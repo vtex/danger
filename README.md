@@ -8,15 +8,12 @@ Opinionated and configurable `danger.js` rules.
 
 - [Usage](#usage)
 - [Rules](#rules)
-  - [`file_changes`](#file_changes)
-  - [`changelog`](#changelog)
   - [`description`](#description)
   - [`wip`](#wip)
   - [`assignee`](#assignee)
   - [`reviewers`](#reviewers)
   - [`pr_size`](#pr_size)
   - [`lock_file`](#lock_file)
-  - [`need_rebase`](#need_rebase)
   - [`no_dot_only`](#no_dot_only)
   - [`no_console_log`](#no_console_log)
   - [`no_debugger`](#no_debugger)
@@ -68,7 +65,6 @@ const config = {
     reviewers: 'warn',
     pr_size: ['warn', { additionLimit: 800, deletionLimit: -1 }],
     lock_file: 'warn',
-    need_rebase: 'warn',
     no_dot_only: ['fail', { pattern: /test|spec/i }],
     no_console_log: ['warn', { pattern: /\.[tj]sx?$/i }],
     no_debugger: ['fail', { pattern: /\.[tj]sx?$/i }],
@@ -100,55 +96,6 @@ Rules are configured in a similar manner to `eslint` rules:
 - `info` - rule result is a informational log;
 - `warn` - rule result should be an alert;
 - `fail` - rule result will block the pull request;
-
----
-
-### `file_changes`
-
-Display a list of all _created_, _modified_ and _deleted_ files.
-
-**Options:**
-
-```js
-{
-  // Should list created files
-  created: true,
-  // Should list deleted files
-  deleted: true,
-  // Should list modified files
-  modified: true,
-}
-```
-
-**Example:**
-
-> 🎨 **Changed Files:**
-> .prettierrc, package.json, yarn.lock
->
-> ✨ **Created Files:**
-> .foo/ci.yml, .foo/deployment.json
->
-> 🔥 **Deleted Files:**
-> .foo/cy.yml
-
----
-
-### `changelog`
-
-Enforce updates on the `CHANGELOG.md` file for every pull request.
-
-**Options:**
-
-```js
-{
-  // Path to the changelog file
-  path: 'CHANGELOG.md',
-},
-```
-
-**Example:**
-
-> 📝 Please add a changelog entry for your changes.
 
 ---
 
@@ -229,16 +176,6 @@ Enforce lock files are updated together with the `package.json` file.
 **Example:**
 
 > Changes were made to package.json, but not to yarn.lock - Perhaps you need to run yarn install?
-
----
-
-### `need_rebase`
-
-Display a message if the pull request branch needs a rebase with the `base` branch.
-
-**Example:**
-
-> Branch is not rebased with `master`.
 
 ---
 

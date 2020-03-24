@@ -1,0 +1,6 @@
+{
+  "extends": "vtex",
+  "globals": {
+    "danger": true
+  }
+}

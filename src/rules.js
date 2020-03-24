@@ -1,47 +1,9 @@
-import {
-  formatFilenames,
-  linkToFile,
-  findTermsInfile,
-  findAndFormatTerms,
-} from './utils.js';
-import {
-  modifiedFiles,
-  deletedFiles,
-  createdFiles,
-  existingFiles,
-} from './collections.js';
+import { linkToFile, findTermsInfile, findAndFormatTerms } from './utils.js';
+import { modifiedFiles, existingFiles } from './collections.js';
 
 export const {
-  github: { pr, thisPR, requested_reviewers },
+  github: { pr, thisPR, requested_reviewers: requestedReviewers },
 } = danger;
-
-export function showFileChanges({
-  created = true,
-  deleted = true,
-  modified = true,
-}) {
-  const msg = [
-    modified &&
-      modifiedFiles.length &&
-      `:art: **Changed Files**:\n${formatFilenames(modifiedFiles)}`,
-    created &&
-      createdFiles.length &&
-      `:sparkles: **Created Files**:\n${formatFilenames(createdFiles)}`,
-    deleted &&
-      deletedFiles.length &&
-      `:fire: **Deleted Files**:\n${formatFilenames(deletedFiles)}`,
-  ]
-    .filter(Boolean)
-    .join('\n\n');
-  return msg;
-}
-
-export function checkChangelog({ path }) {
-  const hasChangelog = existingFiles.includes(path);
-  if (!hasChangelog) {
-    return ':pencil: Please add a changelog entry for your changes.';
-  }
-}
 
 export function checkDescription({ minLength = 20 }) {
   if (pr.body.length < minLength) {
@@ -62,20 +24,19 @@ export function checkAssignee() {
 }
 
 export function checkReviewers() {
-  if (!thisPR || !requested_reviewers) return;
+  if (!thisPR || !requestedReviewers) return;
 
   const reviewers = [
-    ...requested_reviewers.teams.map(
+    ...requestedReviewers.teams.map(
       requestedTeam => `@${thisPR.owner}/${requestedTeam}`
     ),
-    ...requested_reviewers.users.map(requestedUser => `@${requestedUser}`),
+    ...requestedReviewers.users.map(requestedUser => `@${requestedUser}`),
   ];
 
   if (reviewers.length === 0) {
     return `:busts_in_silhouette: There are no reviewers assigned to this pull request!`;
-  } else {
-    return `:heavy_check_mark: Assigned reviewers:\n-${reviewers.join('\n -')}`;
   }
+  return `:heavy_check_mark: Assigned reviewers:\n-${reviewers.join('\n -')}`;
 }
 
 export function checkPRSize({ additionLimit = 800, deletionLimit = 0 }) {
@@ -96,25 +57,28 @@ export function checkLockFileUpdated() {
   }
 }
 
-export function checkMergeability() {
-  if (!pr.mergeable_state === 'dirty') {
-    return `“Branch is not rebased with \`${pr.base.ref}\`.`;
-  }
-}
-
-export function noDotOnly({ pattern }) {
+export function noDotOnly({ filePattern }) {
   return findAndFormatTerms({
-    files: existingFiles.filter(file => file.match(pattern)),
-    terms: ['it.only', 'describe.only', 'fdescribe', 'fit('],
+    files: existingFiles.filter(file => file.match(filePattern)),
+    terms: [
+      'it.only',
+      'it.skip',
+      'test.only',
+      'test.skip',
+      'describe.only',
+      'describe.skip',
+      'fdescribe',
+      'fit(',
+    ],
     formatter(file, term, line) {
       return `A \`${term}\` was left in ${linkToFile(file, line)}`;
     },
   });
 }
 
-export function noConsoleLog({ pattern }) {
+export function noConsoleLog({ filePattern }) {
   return findAndFormatTerms({
-    files: existingFiles.filter(file => file.match(pattern)),
+    files: existingFiles.filter(file => file.match(filePattern)),
     terms: ['console.log'],
     formatter(file, term, line) {
       return `A wild \`${term}\` has appeared on ${linkToFile(
@@ -125,9 +89,9 @@ export function noConsoleLog({ pattern }) {
   });
 }
 
-export function noDebugger({ pattern }) {
+export function noDebugger({ filePattern }) {
   return findAndFormatTerms({
-    files: existingFiles.filter(file => file.match(pattern)),
+    files: existingFiles.filter(file => file.match(filePattern)),
     terms: [/^\s+?(debugger;?)$/m],
     formatter(file, term, line) {
       return `Is this a \`${term}\` that I see on ${linkToFile(file, line)}?`;

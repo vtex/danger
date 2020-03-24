@@ -5,15 +5,12 @@ import * as Rules from './rules.js';
 import { setConfig } from './config.js';
 
 const ruleMap = {
-  file_changes: Rules.showFileChanges,
-  changelog: Rules.checkChangelog,
   description: Rules.checkDescription,
   wip: Rules.checkWIP,
   assignee: Rules.checkAssignee,
   reviewers: Rules.checkReviewers,
   pr_size: Rules.checkPRSize,
   lock_file: Rules.checkLockFileUpdated,
-  need_rebase: Rules.checkMergeability,
   no_dot_only: Rules.noDotOnly,
   no_console_log: Rules.noConsoleLog,
   no_debugger: Rules.noDebugger,
