@@ -19,7 +19,7 @@ const ruleMap = {
 };
 
 export function assert(opts) {
-  if (pr.user.type === 'Bot') {
+  if (danger.github.pr.user.type === 'Bot') {
     return;
   }
 
