@@ -19,9 +19,9 @@ const ruleMap = {
 };
 
 export function assert(opts) {
-  // if (pr.user.type === 'Bot') {
-  //   return;
-  // }
+  if (pr.user.type === 'Bot') {
+    return;
+  }
 
   const config = setConfig(opts);
 
