@@ -1,3 +1,5 @@
+import { keepachangelog } from 'danger-plugin-keepachangelog';
+
 import * as Collections from './collections.js';
 import * as Utils from './utils.js';
 import * as Rules from './rules.js';
@@ -6,7 +8,6 @@ import { setConfig } from './config.js';
 
 const ruleMap = {
   description: Rules.checkDescription,
-  wip: Rules.checkWIP,
   assignee: Rules.checkAssignee,
   reviewers: Rules.checkReviewers,
   pr_size: Rules.checkPRSize,
@@ -17,10 +18,18 @@ const ruleMap = {
   enforce_graphql_provider: Rules.enforceGraphQLProvider,
 };
 
-export function assert(config) {
-  const { rules } = setConfig(config);
+export function assert(opts) {
+  // if (pr.user.type === 'Bot') {
+  //   return;
+  // }
 
-  for (const [rule, options] of Object.entries(rules)) {
+  const config = setConfig(opts);
+
+  if (config.keepachangelog) {
+    keepachangelog();
+  }
+
+  for (const [rule, options] of Object.entries(config.rules)) {
     const [level, ruleOptions] = Array.isArray(options) ? options : [options];
 
     if (!level || level === 'off') continue;

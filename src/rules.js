@@ -11,12 +11,6 @@ export function checkDescription({ minLength = 20 }) {
   }
 }
 
-export function checkWIP() {
-  if (pr.title.match(/wip/i)) {
-    return ':construction: Pull request is currently a **Work In Progress**.';
-  }
-}
-
 export function checkAssignee() {
   if (pr.assignee === null) {
     return ':bust_in_silhouette: Please assign someone to merge this PR, and optionally include people who should review.';

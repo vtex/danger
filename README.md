@@ -9,7 +9,6 @@ Opinionated and configurable `danger.js` rules.
 - [Usage](#usage)
 - [Rules](#rules)
   - [`description`](#description)
-  - [`wip`](#wip)
   - [`assignee`](#assignee)
   - [`reviewers`](#reviewers)
   - [`pr_size`](#pr_size)
@@ -49,6 +48,8 @@ It also accepts a configuration object:
 const { assert } = require('@vtex/danger');
 
 const config = {
+  // Set to true to enforce keepachangelog rules.
+  keepachangelog: true,
   rules: {
     file_changes: [
       'off',
@@ -60,7 +61,6 @@ const config = {
     ],
     changelog: 'fail',
     description: ['fail', { minLength: 20 }],
-    wip: 'fail',
     assignee: 'warn',
     reviewers: 'warn',
     pr_size: ['warn', { additionLimit: 800, deletionLimit: -1 }],
@@ -115,16 +115,6 @@ Enforce a minimum description length.
 **Example:**
 
 > 📝 Please add a changelog entry for your changes.
-
----
-
-### `wip`
-
-Display a message alerting that the pull request is currently a work-in-progress. It looks for a `WIP` on the pull request title.
-
-**Example:**
-
-> 🚧 Pull request is currently a **Work In Progress**.
 
 ---
 

@@ -1,15 +1,9 @@
 let currentConfig;
 
 export const defaultConfig = {
+  keepachangelog: true,
   rules: {
-    changelog: [
-      'fail',
-      {
-        path: 'CHANGELOG.md',
-      },
-    ],
     description: ['fail', { minLength: 20 }],
-    wip: 'fail',
     assignee: 'warn',
     reviewers: 'warn',
     pr_size: [
