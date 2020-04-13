@@ -44,7 +44,7 @@ export async function checkPRSize({ additionLimit = 420, deletionLimit = 0 }) {
   const nChanges = fileList
     .filter(f => {
       const filename = basename(f.filename);
-      return filename !== 'package-lock.json' && filename === 'yarn.lock';
+      return filename !== 'package-lock.json' && filename !== 'yarn.lock';
     })
     .reduce((acc, file) => acc + file.additions + file.deletions, 0);
 
