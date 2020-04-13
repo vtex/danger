@@ -30,7 +30,6 @@ export function checkReviewers() {
   if (reviewers.length === 0) {
     return `:busts_in_silhouette: There are no reviewers assigned to this pull request!`;
   }
-  return `:heavy_check_mark: Assigned reviewers:\n-${reviewers.join('\n -')}`;
 }
 
 export function checkPRSize({ additionLimit = 800, deletionLimit = 0 }) {
