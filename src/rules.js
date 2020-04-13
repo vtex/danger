@@ -1,3 +1,5 @@
+import { basename } from 'path';
+
 import { linkToFile, findTermsInfile, findAndFormatTerms } from './utils.js';
 import { modifiedFiles, existingFiles } from './collections.js';
 
@@ -32,11 +34,24 @@ export function checkReviewers() {
   }
 }
 
-export function checkPRSize({ additionLimit = 800, deletionLimit = 0 }) {
+export async function checkPRSize({ additionLimit = 420, deletionLimit = 0 }) {
+  const { data: fileList } = await danger.github.api.pulls.listFiles({
+    owner: danger.github.thisPR.owner,
+    repo: danger.github.thisPR.repo,
+    pull_number: danger.github.thisPR.number,
+  });
+
+  const nChanges = fileList
+    .filter(f => {
+      const filename = basename(f.filename);
+      return filename !== 'package-lock.json' && filename === 'yarn.lock';
+    })
+    .reduce((acc, file) => acc + file.additions + file.deletions, 0);
+
   const modificationLimit =
     Math.max(0, additionLimit) + Math.max(0, deletionLimit);
 
-  if (pr.additions + pr.deletions > modificationLimit) {
+  if (nChanges > modificationLimit) {
     return `:eyes: Pull Request size seems relatively large (**>${modificationLimit}** modifications). If Pull Request contains multiple changes, split each into separate PR will helps faster, easier review.`;
   }
 }

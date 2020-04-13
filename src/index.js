@@ -18,7 +18,7 @@ const ruleMap = {
   enforce_graphql_provider: Rules.enforceGraphQLProvider,
 };
 
-export function assert(opts) {
+export async function assert(opts) {
   if (danger.github.pr.user.type === 'Bot') {
     return;
   }
@@ -29,13 +29,13 @@ export function assert(opts) {
     keepachangelog();
   }
 
-  for (const [rule, options] of Object.entries(config.rules)) {
+  for await (const [rule, options] of Object.entries(config.rules)) {
     const [level, ruleOptions] = Array.isArray(options) ? options : [options];
 
     if (!level || level === 'off') continue;
 
     const result = []
-      .concat(ruleMap[rule](ruleOptions))
+      .concat(await ruleMap[rule](ruleOptions))
       .filter(Boolean)
       .map(i => (Array.isArray(i) ? i : [i]));
 
