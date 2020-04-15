@@ -29,7 +29,7 @@ export function checkReviewers() {
     ...requestedReviewers.users.map(requestedUser => `@${requestedUser}`),
   ];
 
-  if (reviewers.length === 0 || reviews.length === 0) {
+  if (reviewers.length === 0 && reviews.length === 0) {
     return `:busts_in_silhouette: There are no reviewers assigned to this pull request!`;
   }
 }
