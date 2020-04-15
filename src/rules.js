@@ -4,7 +4,7 @@ import { linkToFile, findTermsInfile, findAndFormatTerms } from './utils.js';
 import { modifiedFiles, existingFiles } from './collections.js';
 
 export const {
-  github: { pr, thisPR, requested_reviewers: requestedReviewers },
+  github: { pr, thisPR, requested_reviewers: requestedReviewers, reviews },
 } = danger;
 
 export function checkDescription({ minLength = 20 }) {
@@ -29,7 +29,7 @@ export function checkReviewers() {
     ...requestedReviewers.users.map(requestedUser => `@${requestedUser}`),
   ];
 
-  if (reviewers.length === 0) {
+  if (reviewers.length === 0 || reviews.length === 0) {
     return `:busts_in_silhouette: There are no reviewers assigned to this pull request!`;
   }
 }
