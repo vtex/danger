@@ -1,22 +1,15 @@
-## [0.0.15](/compare/v0.0.14...v0.0.15) (2020-04-15)
+## [0.0.16](/compare/v0.0.12...v0.0.16) (2020-04-17)
 
 
 ### Bug Fixes
 
-* 🐛 review check again a7fda27
+* 🐛 review check 6d23791
+* 🐛 review check again c561ff7
+* disable reviewers and assigner rules 1210980
 
 
 
-## [0.0.14](/compare/v0.0.13...v0.0.14) (2020-04-15)
-
-
-### Bug Fixes
-
-* 🐛 review check 4b259b9
-
-
-
-## [0.0.13](/compare/v0.0.11...v0.0.13) (2020-04-13)
+## [0.0.12](/compare/v0.0.11...v0.0.12) (2020-04-13)
 
 
 ### Features
