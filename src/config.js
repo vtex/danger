@@ -4,8 +4,8 @@ export const defaultConfig = {
   keepachangelog: true,
   rules: {
     description: ['fail', { minLength: 20 }],
-    assignee: 'warn',
-    reviewers: 'warn',
+    assignee: 'off',
+    reviewers: 'off',
     pr_size: [
       'warn',
       {
