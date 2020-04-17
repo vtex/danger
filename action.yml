@@ -1,0 +1,8 @@
+name: VTEX danger action
+description: Run @vtex/danger encapsulated in an action
+runs:
+  using: docker
+  image: Dockerfile
+branding:
+  icon: code
+  color: orange
