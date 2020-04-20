@@ -1,40 +1,12 @@
-## [0.0.22](/compare/v0.0.21...v0.0.22) (2020-04-20)
-
-
-
-## [0.0.21](/compare/v0.0.20...v0.0.21) (2020-04-20)
-
-
-### Bug Fixes
-
-* export again 8d02ad5
-
-
-
-## [0.0.20](/compare/v0.0.19...v0.0.20) (2020-04-20)
-
-
-### Bug Fixes
-
-* exports 4222c41
-
-
-
-## [0.0.19](/compare/v0.0.18...v0.0.19) (2020-04-20)
-
-
-### Bug Fixes
-
-* remove es6 imports ba5530b
-
-
-
-## [0.0.18](/compare/v0.0.17...v0.0.18) (2020-04-20)
+## [0.0.22](/compare/v0.0.17...v0.0.22) (2020-04-20)
 
 
 ### Bug Fixes
 
 * add missing dependency 5d7947c
+* export again d562d3b
+* exports 408cac5
+* remove es6 imports 7b5c211
 
 
 
