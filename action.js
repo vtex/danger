@@ -6,8 +6,6 @@ const { Toolkit } = require('actions-toolkit')
 // Run your GitHub Action!
 Toolkit.run(
   async tools => {
-    tools.log.info(JSON.stringify(process.env, null, 2))
-
     const dangerfilePath = resolve(tools.workspace, 'dangerfile.js')
     if (!existsSync(dangerfilePath)) {
       tools.log.warn(
