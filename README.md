@@ -32,20 +32,20 @@ $ npm i -D @vtex/danger
 
 The next step is to create a `dangerfile.js` file. It's where `danger` expects your pull request checks to be.
 
-Instead of having to write all kinds of checks over and over again, `@vtex/danger` exports a `assert` method which executes all of its checks:
+Instead of having to write all kinds of checks over and over again, `@vtex/danger` exports a `verify` method which executes all of its checks:
 
 ```js
 // dangerfile.js
-const { assert } = require('@vtex/danger');
+const { verify } = require('@vtex/danger')
 
-assert();
+verify()
 ```
 
 It also accepts a configuration object:
 
 ```js
 // dangerfile.js
-const { assert } = require('@vtex/danger');
+const { verify } = require('@vtex/danger')
 
 const config = {
   // Set to true to enforce keepachangelog rules.
@@ -70,9 +70,9 @@ const config = {
     no_debugger: ['fail', { pattern: /\.[tj]sx?$/i }],
     enforce_graphql_provider: 'fail',
   },
-};
+}
 
-assert(config);
+verify(config)
 ```
 
 ## Rules
