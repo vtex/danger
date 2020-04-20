@@ -1,6 +1,6 @@
 {
   "name": "@vtex/danger",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "author": "Christian Kaisermann <christian@kaisermann.me>",
   "main": "lib/index.js",
   "files": [
@@ -10,13 +10,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
     "lint": "eslint --ext js,jsx,ts,tsx .",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json}\"",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "tag": "git tag -a v$npm_package_version -m 'Release v$npm_package_version'",
-    "release": "npm run build && npm run version && git add package.json && git commit -m \"chore: release v$npm_package_version\"",
+    "release": "npm run version && git add package.json && git commit -m \"chore: release v$npm_package_version\"",
     "prepublishOnly": "npm run release && npm run tag"
   },
   "husky": {
