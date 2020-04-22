@@ -1,4 +1,5 @@
 const { resolve } = require('path')
+const { existsSync } = require('fs')
 
 const { Toolkit } = require('actions-toolkit')
 
@@ -8,9 +9,19 @@ const resolveFromActionRoot = (...paths) => resolve(__dirname, '..', ...paths)
 Toolkit.run(
   async tools => {
     try {
+      const localDangerfilePath = resolve(tools.workspace, 'dangerfile.js')
+
       await tools.runInWorkspace(
         resolveFromActionRoot('node_modules', '.bin', 'danger'),
-        ['ci', '-d', resolveFromActionRoot('action', 'dangerfile.js')]
+        [
+          'ci',
+          '-d',
+          existsSync(localDangerfilePath)
+            ? // if the project has a dangerfile, let's use it
+              localDangerfilePath
+            : // if not, use our default one
+              resolveFromActionRoot('action', 'dangerfile.js'),
+        ]
       )
     } catch (e) {
       tools.exit.failure(e)
