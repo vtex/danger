@@ -1,3 +1,12 @@
+## [0.2.5](/compare/v0.2.4...v0.2.5) (2020-04-22)
+
+
+### Bug Fixes
+
+* 🐛 display full invalid test call name 9327864
+
+
+
 ## [0.2.4](/compare/v0.2.2...v0.2.4) (2020-04-22)
 
 
