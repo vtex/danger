@@ -1,3 +1,13 @@
+## [0.2.4](/compare/v0.2.2...v0.2.4) (2020-04-22)
+
+
+### Features
+
+* 🎸 catch xit( calls c63a8c6
+* allow to use local dangerfile 2596eb0
+
+
+
 ## [0.2.2](/compare/v0.2.1...v0.2.2) (2020-04-22)
 
 
