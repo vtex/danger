@@ -1,3 +1,12 @@
+# [0.2.0](/compare/v0.1.1...v0.2.0) (2020-04-22)
+
+
+### Features
+
+* 🎸 add vtex-danger cli to test locally a7ec6ee
+
+
+
 ## [0.1.1](/compare/v0.1.0...v0.1.1) (2020-04-22)
 
 
