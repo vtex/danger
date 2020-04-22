@@ -227,23 +227,6 @@ Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(`, `it.skip`, `describe
 
 ---
 
-#### `no_console_log`
-
-Enforce no `console.log` inside files which respect the specified filename pattern.
-
-**Options:**
-
-```js
-{
-  // files to search pattern
-  pattern: /\.[tj]sx?$/i,
-}
-```
-
-**Example:**
-
-> ⚠️ A wild `console.log` has appeared on `react/components/pages/Details.tsx#L21`. Is this supposed to be here?
-
 #### `no_debugger`
 
 Enforce no `debugger` inside files which respect the specified filename pattern.
