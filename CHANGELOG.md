@@ -1,3 +1,12 @@
+## [0.2.1](/compare/v0.2.0...v0.2.1) (2020-04-22)
+
+
+### Bug Fixes
+
+* 🐛 internal dangerfile path 4b5702d
+
+
+
 # [0.2.0](/compare/v0.1.1...v0.2.0) (2020-04-22)
 
 
