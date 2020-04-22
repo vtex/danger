@@ -87,7 +87,9 @@ const { verify } = require('@vtex/danger')
 
 const config = {
   // Set to true to enforce keepachangelog rules.
-  keepachangelog: true,
+  keepachangelog: {
+    changeVersion: false,
+  },
   rules: {
     file_changes: [
       'off',
@@ -110,6 +112,20 @@ const config = {
 }
 
 verify(config)
+```
+
+### Changelog
+
+`@vtex/danger` uses the [danger-plugin-keepachangelog](https://github.com/vtex/danger-plugin-keepachangelog/) to check for the validity of a pull request's changelog entry. Please refer to the plugin documentation for further explanations and options.
+`The plugin can be configured by passing a`keepachangelog` property to the config object:
+
+```js
+{
+  keepachangelog: {
+    ...pluginOptions
+  },
+  ...
+}
 ```
 
 ### Rules
