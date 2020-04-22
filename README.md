@@ -210,7 +210,7 @@ Enforce lock files are updated together with the `package.json` file.
 
 #### `no_dot_only`
 
-Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(` inside files which respect the specified filename pattern.
+Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(`, `it.skip`, `describe.skip` inside files which respect the specified filename pattern.
 
 **Options:**
 
