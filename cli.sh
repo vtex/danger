@@ -1,3 +1,5 @@
 #!/bin/bash
+SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+PWD=$(pwd)
 
-$(pwd)/node_modules/.bin/danger $1 -d ./action/dangerfile.js "${@:2}"
+$PWD/node_modules/.bin/danger $1 -d $SCRIPTPATH/action/dangerfile.js "${@:2}"
