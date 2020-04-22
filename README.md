@@ -1,28 +1,67 @@
 # `@vtex/danger`
 
-Opinionated and configurable `danger.js` rules.
+This repo exposes two projects:
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=3 orderedList=false} -->
+- `@vtex/danger`, a package with an opinionated and configurable danger ruleset;
+- `vtex/danger`, a Github Action that automatically runs the default configuration of `@vtex/danger` in a given repository.
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=4 orderedList=false} -->
 
 <!-- code_chunk_output -->
 
-- [Usage](#usage)
-- [Rules](#rules)
-  - [`description`](#description)
-  - [`assignee`](#assignee)
-  - [`reviewers`](#reviewers)
-  - [`pr_size`](#pr_size)
-  - [`lock_file`](#lock_file)
-  - [`no_dot_only`](#no_dot_only)
-  - [`no_console_log`](#no_console_log)
-  - [`no_debugger`](#no_debugger)
-  - [`enforce_graphql_provider`](#enforce_graphql_provider)
+- [Usage as an action](#usage-as-an-action)
+- [Usage as a package](#usage-as-a-package)
+  - [Rules](#rules)
+    - [`description`](#description)
+    - [`assignee`](#assignee)
+    - [`reviewers`](#reviewers)
+    - [`pr_size`](#pr_size)
+    - [`lock_file`](#lock_file)
+    - [`no_dot_only`](#no_dot_only)
+    - [`no_console_log`](#no_console_log)
+    - [`no_debugger`](#no_debugger)
+    - [`enforce_graphql_provider`](#enforce_graphql_provider)
 
 <!-- /code_chunk_output -->
 
-## Usage
+## Usage as an action
 
-Begin by installing the package:
+`vtex/danger` automatically installs your dependencies and run `danger` for you. Your project doesn't even have to have a `dangerfile.js`!
+
+To use it, it's as simple as adding it to one of your project workflows:
+
+```yml
+name: Some github action
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  danger-ci:
+    name: Danger CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12.x
+      - name: Danger CI
+        uses: vtex/danger@master
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          REQUIRE_CHANGELOG_VERSION: true
+```
+
+The `vtex/danger` action accepts the below options:
+
+- `GITHUB_TOKEN` _(required)_ - A Github token for danger to use. You can you the `secrets.GITHUB_TOKEN` secret.
+- `REQUIRE_CHANGELOG_VERSION` _(default: `false`)_ - Define if the changelog rule should look for a new release version entry in the updated changelog.
+
+## Usage as a package
+
+If you want to use the `@vtex/danger` ruleset separatedly from its action, you can install the package and call it in your `dangerfile.js`.
 
 ```shell
 $ yarn add -D @vtex/danger
@@ -75,7 +114,7 @@ const config = {
 verify(config)
 ```
 
-## Rules
+### Rules
 
 Rules are configured in a similar manner to `eslint` rules:
 
@@ -99,7 +138,7 @@ Rules are configured in a similar manner to `eslint` rules:
 
 ---
 
-### `description`
+#### `description`
 
 Enforce a minimum description length.
 
@@ -118,7 +157,7 @@ Enforce a minimum description length.
 
 ---
 
-### `assignee`
+#### `assignee`
 
 Enforce having an assigned user to merge the pull request.
 
@@ -128,7 +167,7 @@ Enforce having an assigned user to merge the pull request.
 
 ---
 
-### `reviewers`
+#### `reviewers`
 
 Enforce having at least one person to review the pull request.
 
@@ -138,7 +177,7 @@ Enforce having at least one person to review the pull request.
 
 ---
 
-### `pr_size`
+#### `pr_size`
 
 Enforce smaller pull requests by alerting if its size is relatively big. This rule considers `additions + deletions`.
 
@@ -159,7 +198,7 @@ Enforce smaller pull requests by alerting if its size is relatively big. This ru
 
 ---
 
-### `lock_file`
+#### `lock_file`
 
 Enforce lock files are updated together with the `package.json` file.
 
@@ -169,7 +208,7 @@ Enforce lock files are updated together with the `package.json` file.
 
 ---
 
-### `no_dot_only`
+#### `no_dot_only`
 
 Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(` inside files which respect the specified filename pattern.
 
@@ -188,7 +227,7 @@ Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(` inside files which re
 
 ---
 
-### `no_console_log`
+#### `no_console_log`
 
 Enforce no `console.log` inside files which respect the specified filename pattern.
 
@@ -205,7 +244,7 @@ Enforce no `console.log` inside files which respect the specified filename patte
 
 > ⚠️ A wild `console.log` has appeared on `react/components/pages/Details.tsx#L21`. Is this supposed to be here?
 
-### `no_debugger`
+#### `no_debugger`
 
 Enforce no `debugger` inside files which respect the specified filename pattern.
 
@@ -222,7 +261,7 @@ Enforce no `debugger` inside files which respect the specified filename pattern.
 
 > ⚠️ Is this a `debugger` that I see on [withQuery.tsx#L52](https://github.com/owner/repo/blob/src/withQuery.tsx#L52)?
 
-### `enforce_graphql_provider`
+#### `enforce_graphql_provider`
 
 Enforce `.gql` and `.graphql` files to explicitly declare the `@context(provider: "...")` for graphql queries.
 
