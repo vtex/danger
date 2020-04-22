@@ -18,7 +18,6 @@ This repo exposes two projects:
     - [`pr_size`](#pr_size)
     - [`lock_file`](#lock_file)
     - [`no_ignored_test`](#no_ignored_test)
-    - [`no_console_log`](#no_console_log)
     - [`no_debugger`](#no_debugger)
     - [`enforce_graphql_provider`](#enforce_graphql_provider)
 
@@ -105,7 +104,6 @@ const config = {
     pr_size: ['warn', { additionLimit: 800, deletionLimit: -1 }],
     lock_file: 'warn',
     no_ignored_test: ['fail', { pattern: /test|spec/i }],
-    no_console_log: ['warn', { pattern: /\.[tj]sx?$/i }],
     no_debugger: ['fail', { pattern: /\.[tj]sx?$/i }],
     enforce_graphql_provider: 'fail',
   },
