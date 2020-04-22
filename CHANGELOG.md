@@ -1,3 +1,12 @@
+# [0.1.0](/compare/v0.0.23...v0.1.0) (2020-04-22)
+
+
+### Features
+
+* remove no-console-log rule 68877c1
+
+
+
 ## [0.0.23](/compare/v0.0.17...v0.0.23) (2020-04-20)
 
 
