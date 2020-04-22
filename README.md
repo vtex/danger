@@ -208,7 +208,7 @@ Enforce lock files are updated together with the `package.json` file.
 
 #### `no_ignored_test`
 
-Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(`, `it.skip`, `describe.skip` inside files which respect the specified filename pattern.
+Enforce no `it.only`, `describe.only`, `fdescribe`, `fit(`, `xit(`, `it.skip`, `describe.skip` inside files which respect the specified filename pattern.
 
 **Options:**
 
