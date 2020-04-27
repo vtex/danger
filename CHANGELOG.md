@@ -1,3 +1,12 @@
+## [0.2.6](/compare/v0.2.5...v0.2.6) (2020-04-27)
+
+
+### Bug Fixes
+
+* 🐛 horrible phrasing in size rule 0e82dbf
+
+
+
 ## [0.2.5](/compare/v0.2.4...v0.2.5) (2020-04-22)
 
 
