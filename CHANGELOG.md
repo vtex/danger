@@ -1,3 +1,12 @@
+## [0.2.7](/compare/v0.2.6...v0.2.7) (2020-04-29)
+
+
+### Bug Fixes
+
+* 🐛 fix context graphql rule fa246ad
+
+
+
 ## [0.2.6](/compare/v0.2.5...v0.2.6) (2020-04-27)
 
 
