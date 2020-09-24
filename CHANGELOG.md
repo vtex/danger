@@ -1,3 +1,12 @@
+## [0.2.9](/compare/v0.2.8...v0.2.9) (2020-09-24)
+
+
+### Bug Fixes
+
+* 🐛 wrong removed method bf1eff1
+
+
+
 ## [0.2.8](/compare/v0.2.7...v0.2.8) (2020-09-24)
 
 
