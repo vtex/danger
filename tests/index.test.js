@@ -6,7 +6,7 @@ let action
 let tools
 
 // Mock Toolkit.run to define `action` so we can call it
-jest.spyOn(Toolkit, 'run').mockImplementation(actionFn => {
+jest.spyOn(Toolkit, 'run').mockImplementation((actionFn) => {
   action = actionFn
 })
 // Load up our entrypoint file

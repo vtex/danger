@@ -7,7 +7,7 @@ const resolveFromActionRoot = (...paths) => resolve(__dirname, '..', ...paths)
 
 // Run your GitHub Action!
 Toolkit.run(
-  async tools => {
+  async (tools) => {
     try {
       const localDangerfilePath = resolve(tools.workspace, 'dangerfile.js')
 
@@ -25,6 +25,7 @@ Toolkit.run(
       )
     } catch (e) {
       tools.exit.failure(e)
+
       return
     }
 
