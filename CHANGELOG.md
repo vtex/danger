@@ -1,3 +1,12 @@
+## [0.2.8](/compare/v0.2.7...v0.2.8) (2020-09-24)
+
+
+### Bug Fixes
+
+* 🐛 only lint gql files in react folder 04000b3, closes #10
+
+
+
 ## [0.2.7](/compare/v0.2.6...v0.2.7) (2020-04-29)
 
 
@@ -66,12 +75,16 @@
 
 
 
-# [0.1.0](/compare/v0.0.23...v0.1.0) (2020-04-22)
+# [0.1.0](/compare/1.0.0...v0.1.0) (2020-04-22)
 
 
 ### Features
 
 * remove no-console-log rule 68877c1
+
+
+
+# [1.0.0](/compare/v0.0.23...1.0.0) (2020-04-22)
 
 
 
