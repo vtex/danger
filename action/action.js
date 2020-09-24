@@ -11,7 +11,7 @@ Toolkit.run(
     try {
       const localDangerfilePath = resolve(tools.workspace, 'dangerfile.js')
 
-      await tools.runInWorkspace(
+      await tools.exec(
         resolveFromActionRoot('node_modules', '.bin', 'danger'),
         [
           'ci',
