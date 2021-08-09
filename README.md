@@ -60,6 +60,19 @@ The `vtex/danger` action accepts the below options:
 
 ## Usage as a package
 
+> Using as package still need to configure an action as mentioned [here](#usage-as-an-action). <br> It's necessary add the command `yarn install` before the `vtex/danger@master` on `danger-ci` job in your .yml file
+```diff
+       ...
++     - name: yarn install
++       run: yarn install
+      - name: Danger CI
+        uses: vtex/danger@master
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          REQUIRE_CHANGELOG_VERSION: false
+```
+
+### Configuring package
 If you want to use the `@vtex/danger` ruleset separatedly from its action, you can install the package and call it in your `dangerfile.js`.
 
 ```shell
@@ -91,15 +104,6 @@ const config = {
     changeVersion: false,
   },
   rules: {
-    file_changes: [
-      'off',
-      {
-        created: true,
-        deleted: true,
-        modified: true,
-      },
-    ],
-    changelog: 'fail',
     description: ['fail', { minLength: 20 }],
     assignee: 'off',
     reviewers: 'off',
