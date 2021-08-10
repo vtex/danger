@@ -60,7 +60,7 @@ The `vtex/danger` action accepts the below options:
 
 ## Usage as a package
 
-> Using as package still need to configure an action as mentioned [here](#usage-as-an-action). <br> It's necessary add the command `yarn install` before the `vtex/danger@master` on `danger-ci` job in your .yml file
+> Even when using as package, it still needs the configuration mentioned at [Usage as an action](#usage-as-an-action). <br> It's important to mention that it's necessary to add the command `yarn install` before the `vtex/danger@master` on `danger-ci` job in your .yml file
 ```diff
        ...
 +     - name: yarn install
