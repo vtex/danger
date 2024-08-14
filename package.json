@@ -1,6 +1,6 @@
 {
   "name": "@vtex/danger",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "author": "Christian Kaisermann <christian@kaisermann.me>",
   "main": "lib/index.js",
   "files": [
@@ -8,7 +8,7 @@
     "action/dangerfile.js"
   ],
   "bin": {
-    "vtex-danger": "./cli.sh"
+    "vtex-danger": "cli.sh"
   },
   "publishConfig": {
     "access": "public"
